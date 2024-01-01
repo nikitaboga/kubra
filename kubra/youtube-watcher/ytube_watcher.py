@@ -99,15 +99,15 @@ def main():
                 video_json = summarize_video(video)
                 video_json['playlist_name'] = name
                 video_list.append(video_json)
-        #         producer.produce(
-        #             topic="youtube_videos",
-        #             key=video_id,
-        #             value=summarize_video(video),
-        #         )
+                producer.produce(
+                    topic="youtube_videos",
+                    key=video_id,
+                    value=summarize_video(video),
+                )
 
-        # producer.flush()                
+        producer.flush()                
     df = pd.DataFrame(video_list)
-    print(df)
+    #print(df)
     df.to_csv('videos.csv')
     up_to_blob_storage(current_path + '\\videos.csv', 'videos')
 if __name__ == "__main__":
