@@ -12,7 +12,14 @@ config = {
     "schema_registry": {
         "url": "https://psrc-30dr2.us-central1.gcp.confluent.cloud",
         "basic.auth.user.info": "643CSJEPBOV2GEHZ:XKnnUDPA0nvH7GIjkUxg+41i32Mr1S77EIdyzz7ziG+q0rKxgbrzYlqfiOpWHlx0",
-    }
+    },
+    "azure":
+            {
+             "storage_acc_key": "Z98dWOhWG09lB/Hqe+kECwVSCBp/tvv+G+748fDKVE39XV9/GaxiDKlg35IRUdQDR6aBFK8qagdX+ASt+MkAVw=="
+             ,"storage_acc_name": "stkubra"
+             ,"conn_str": "DefaultEndpointsProtocol=https;AccountName=stkubra;AccountKey=tTOG21csXypXa4kiOyabBmLhnqeRJkWvyVWetxYdcI1sPpalAAtyYQUuZW3kecztaavO8yZUvppR+ASt9V3d6Q==;EndpointSuffix=core.windows.net"
+             ,"container_name":"kubra/raw/"
+            }
 }
 
 

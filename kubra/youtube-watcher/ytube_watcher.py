@@ -70,7 +70,9 @@ def summarize_video(video):
         "views": int(video["statistics"].get("viewCount", 0)),
         "likes": int(video["statistics"].get("likeCount", 0)),
         "comments": int(video["statistics"].get("commentCount", 0)),
+        "publishedAt": video["snippet"].get("publishedAt", 0),
     }
+
 
 def main():
     schema_registry_client = SchemaRegistryClient(config["schema_registry"])
@@ -90,19 +92,20 @@ def main():
     youtube_playlist_name = config['youtube_playlist_name'] 
     video_list = [] 
     for id,name in zip(youtube_playlist_id,youtube_playlist_name):
+        print(name)
         for video_item in fetch_playlist_items(google_api_key, id):
             video_id = video_item["contentDetails"]["videoId"]
             for video in fetch_videos(google_api_key, video_id):
                 video_json = summarize_video(video)
                 video_json['playlist_name'] = name
                 video_list.append(video_json)
-                producer.produce(
-                    topic="youtube_videos",
-                    key=video_id,
-                    value=summarize_video(video),
-                )
+        #         producer.produce(
+        #             topic="youtube_videos",
+        #             key=video_id,
+        #             value=summarize_video(video),
+        #         )
 
-        producer.flush()                
+        # producer.flush()                
     df = pd.DataFrame(video_list)
     print(df)
     df.to_csv('videos.csv')
